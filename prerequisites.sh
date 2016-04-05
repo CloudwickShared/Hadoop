@@ -8,7 +8,8 @@ echo setup passwordless ssh login
 echo save the existing firewall configurations
 sudo iptables-save > /etc/sysconfig/iptables
 echo disable firewall
-sudo service iptables stop
+sudo service iptables stop 
+sudo chkconfig iptables off
 echo Validate if firewall is disabled or not using the following command
 sudo service iptables status
 
