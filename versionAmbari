@@ -20,6 +20,16 @@ elif [cat /etc/issue | grep 'Debian' | wc -l >0]
 then 
    cd /etc/apt/sources.list.d
    wget http://public-repo-1.hortonworks.com/ambari/debian7/2.x/updates/2.2.1.0/ambari.list
-   
+
+elif [cat /etc/issue | grep 'Ubuntu \| 12' | wc -l]
+then 
+   cd /etc/apt/sources.list.d
+   wget http://public-repo-1.hortonworks.com/ambari/ubuntu12/2.x/updates/2.2.1.0/ambari.list
+
+elif [cat /etc/issue | grep 'Ubuntu \| 14' | wc -l]
+then
+   cd /etc/apt/sources.list.d
+   wget http://public-repo-1.hortonworks.com/ambari/ubuntu14/2.x/updates/2.2.1.0/ambari.list
+
 fi
 
