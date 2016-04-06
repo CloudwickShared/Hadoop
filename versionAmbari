@@ -1,0 +1,20 @@
+#!/bin/sh
+
+# Download the ambari-server
+if [cat /etc/issue | grep 'Cent\|6.' | wc -l > 0]
+then
+   cd /etc/yum.repos.d/
+   wget http://public-repo-1.hortonworks.com/ambari/centos6/2.x/updates/2.2.1.0/ambari.repo
+
+elif [cat /etc/issue | grep 'Cent\|7.' | wc -l > 0]
+then 
+   cd /etc/yum.repos.d/
+   wget http://public-repo-1.hortonworks.com/ambari/centos7/2.x/updates/2.2.1.0/ambari.repo 
+
+elif [cat /etc/issue | grep 'SUSE' | wc -l > 0]
+then 
+   cd /etc/zypp/repos.d
+   wget http://public-repo-1.hortonworks.com/ambari/suse11/2.x/updates/2.2.1.0/ambari.repo
+
+fi
+
