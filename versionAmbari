@@ -1,12 +1,13 @@
 #!/bin/sh
 
+
 # Download the ambari-server
-if [cat /etc/issue | grep 'Cent\|6.' | wc -l > 0]
+if [cat /etc/issue | grep 'Cent' | grep '6' | wc -l > 0]
 then
    cd /etc/yum.repos.d/
    wget http://public-repo-1.hortonworks.com/ambari/centos6/2.x/updates/2.2.1.0/ambari.repo
 
-elif [cat /etc/issue | grep 'Cent\|7.' | wc -l > 0]
+elif [cat /etc/issue | grep 'Cent' | grep '7' | wc -l > 0]
 then 
    cd /etc/yum.repos.d/
    wget http://public-repo-1.hortonworks.com/ambari/centos7/2.x/updates/2.2.1.0/ambari.repo 
@@ -21,12 +22,12 @@ then
    cd /etc/apt/sources.list.d
    wget http://public-repo-1.hortonworks.com/ambari/debian7/2.x/updates/2.2.1.0/ambari.list
 
-elif [cat /etc/issue | grep 'Ubuntu \| 12' | wc -l]
+elif [cat /etc/issue | grep 'Ubuntu' | grep '12' | wc -l]
 then 
    cd /etc/apt/sources.list.d
    wget http://public-repo-1.hortonworks.com/ambari/ubuntu12/2.x/updates/2.2.1.0/ambari.list
 
-elif [cat /etc/issue | grep 'Ubuntu \| 14' | wc -l]
+elif [cat /etc/issue | grep 'Ubuntu' | grep '14' | wc -l]
 then
    cd /etc/apt/sources.list.d
    wget http://public-repo-1.hortonworks.com/ambari/ubuntu14/2.x/updates/2.2.1.0/ambari.list

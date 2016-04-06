@@ -61,13 +61,14 @@
 4. Create database
   1. Hive
 ```mysql
-CREATE USER 'hive'@'master2.cloudwick.com' IDENTIFIED BY 'hive';
-GRANT ALL PRIVILEGES ON *.* TO 'hive'@'master2.cloudwick.com' with grant option;
+CREATE USER 'hive'@'master' IDENTIFIED BY 'hive';
+GRANT ALL PRIVILEGES ON *.* TO 'hive'@'localhost' with grant option;
 CREATE USER 'hive'@'%' IDENTIFIED BY 'hive';
 GRANT ALL PRIVILEGES ON *.* TO 'hive'@'%' with grant option;
-CREATE USER 'hive'@'master2.cloudwick.com' IDENTIFIED BY
+CREATE USER 'hive'@'<FQDN of the HiveMetaStoreHost>' IDENTIFIED BY
 'hive';
-GRANT ALL PRIVILEGES ON *.* TO 'hive'@'master2.cloudwick.com' with grant option; 
+GRANT ALL PRIVILEGES ON *.* TO 'hive'@'<* FQDN of the
+HiveMetaStoreHost >' with grant option; 
 ```
 
   2. Ambari
@@ -76,20 +77,22 @@ CREATE USER 'ambari'@'master2.cloudwick.com' IDENTIFIED BY 'ambari';
 GRANT ALL PRIVILEGES ON *.* TO 'ambari'@'master2.cloudwick.com' with grant option;
 CREATE USER 'ambari'@'%' IDENTIFIED BY 'ambari';
 GRANT ALL PRIVILEGES ON *.* TO 'ambari'@'%' with grant option;
-CREATE USER 'ambari'@'master2.cloudwick.com' IDENTIFIED BY
+CREATE USER 'ambari'@'<FQDN of the AmbariServerHost>' IDENTIFIED BY
 'ambari';
-GRANT ALL PRIVILEGES ON *.* TO 'ambari'@'master2.cloudwick.com' with grant option; 
+GRANT ALL PRIVILEGES ON *.* TO 'ambari'@'<* FQDN of the
+AmbariServerHost >' with grant option; 
 ```
 
   3. Oozie
 ```mysql
-CREATE USER 'oozie'@'master2.cloudwick.com' IDENTIFIED BY 'oozie';
-GRANT ALL PRIVILEGES ON *.* TO 'oozie'@'master2.cloudwick.com' with grant option;
+CREATE USER 'oozie'@'localhost' IDENTIFIED BY 'oozie';
+GRANT ALL PRIVILEGES ON *.* TO 'oozie'@'localhost' with grant option;
 CREATE USER 'oozie'@'%' IDENTIFIED BY 'oozie';
 GRANT ALL PRIVILEGES ON *.* TO 'oozie'@'%' with grant option;
-CREATE USER 'oozie'@'master2.cloudwick.com' IDENTIFIED BY
+CREATE USER 'oozie'@'<FQDN of the OozieServerHost>' IDENTIFIED BY
 'oozie';
-GRANT ALL PRIVILEGES ON *.* TO 'oozie'@'master2.cloudwick.com' with grant option;
+GRANT ALL PRIVILEGES ON *.* TO 'oozie'@'<* FQDN of the OozieServerHost
+>' with grant option;
 ```
 
 5. Install Ambari 
