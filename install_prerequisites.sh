@@ -46,6 +46,11 @@ yum -y upgrade openssl
 
 echo "openSSL updated"
 
+sed -i.old s/SELINUX=enforcing/SELINUX=disabled/ /etc/selinux/config
+echo 0 > /selinux/enforce
+
+echo "SELinux disabled"
+
 echo never > /sys/kernel/mm/transparent_hugepage/enabled
 
 if grep -q "echo never > /sys/kernel/mm/transparent_hugepage/enabled" /etc/rc.local
