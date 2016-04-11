@@ -1,4 +1,3 @@
-## the code in the git library 
 #!/bin/bash
 # Simple setup.sh for configuring CentOS6 and Hadoop
 yum -y install wget
@@ -47,6 +46,11 @@ yum -y upgrade openssl
 
 echo "openSSL updated"
 
+sed -i.old s/SELINUX=enforcing/SELINUX=disabled/ /etc/selinux/config
+echo 0 > /selinux/enforce
+
+echo "SELinux disabled"
+
 echo never > /sys/kernel/mm/transparent_hugepage/enabled
 
 if grep -q "echo never > /sys/kernel/mm/transparent_hugepage/enabled" /etc/rc.local
@@ -56,8 +60,8 @@ if grep -q "echo never > /sys/kernel/mm/transparent_hugepage/enabled" /etc/rc.lo
 fi
 
 
-cat hosts.list>> /etc/hosts
-echo "Update the /etc/hosts"
+# cat hosts.list>> /etc/hosts
+# echo "Update the /etc/hosts"
 
 cd /opt
 
@@ -80,6 +84,10 @@ echo "installed mysql connector to java"
 yum -y install ambari-agent
 
 
-echo "ambari is installed"
+echo "ambari-agent is installed"
+
+sed -i.old -e 's/hostname=localhost/hostname=ambari.cloudwick.com/' /etc/ambari-agent/conf/ambari-agent.ini
+
+echo "ambari-agent is configured"
 
 echo " prerequisites are installed" 
