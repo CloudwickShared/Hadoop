@@ -1,20 +1,33 @@
 #!/bin/bash
 # Simple setup.sh for configuring CentOS6 and Hadoop
-yum -y install wget
-echo "installed wget"
-yum -y install unzip
-echo "installed unzip"
-yum -y install curl
-echo "installed curl"
-yum -y install tar
-echo "installed tar"
+
+$log="my_log"
+
+
+yum -y update > $log
+
+yum -y install wget >> $log
+res="$?"; goal="wget"
+if [[ $res -eq 0 ]]; then echo "installed successfully: ${goal}"; else echo "Failed to install: ${goal}"; exit 1; fi;
+
+yum -y install unzip >> $log
+res=$? ; goal="unzip"
+if [[ $res -eq 0 ]]; then echo "installed successfully: ${goal}"; else echo "Failed to install: ${goal}"; exit 1; fi;
+
+yum -y install curl >> $log
+res=$? ; goal="curl"
+if [[ $res -eq 0 ]]; then echo "installed successfully: ${goal}"; else echo "Failed to install: ${goal}"; exit 1; fi;
+
+yum -y install tar >> $log
+res=$? ; goal="tar"
+
 
 service iptables stop
 chkconfig iptables off
 service ip6tables stop
 chkconfig ip6tables off
 
-echo "disabled Ipv6 tables" 
+echo "disabled Ipv6 tables"
 
 sysctl -w vm.swappiness=0
 echo 0 > /proc/sys/vm/swappiness
@@ -40,7 +53,7 @@ service ntpd start
 chkconfig ntpd on
 ntpstat
 
-echo "ntpd is running and enabled on boot" 
+echo "ntpd is running and enabled on boot"
 
 yum -y upgrade openssl
 
@@ -67,7 +80,7 @@ cd /opt
 
 wget --no-check-certificate --no-cookies --header "Cookie: oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/8u77-b03/jdk-8u77-linux-x64.rpm -O jdk-8u77-linux-x64.rpm
 
-echo "downloaded java" 
+echo "downloaded java"
 rpm -ivh jdk-8u77-linux-x64.rpm
 
 echo "installed java"
@@ -75,10 +88,10 @@ alternatives --install /usr/bin/java java /usr/java/jdk1.8.0_77/bin/java 200000
 
 wget -nv http://public-repo-1.hortonworks.com/ambari/centos6/2.x/updates/2.2.1.0/ambari.repo -O /etc/yum.repos.d/ambari.repo
 
-echo "downloaded ambari.repo" 
+echo "downloaded ambari.repo"
 
 yum -y install mysql-connector-java
-echo "installed mysql connector to java" 
+echo "installed mysql connector to java"
 
 
 yum -y install ambari-agent
@@ -90,4 +103,4 @@ sed -i.old -e 's/hostname=localhost/hostname=ambari.cloudwick.com/' /etc/ambari-
 
 echo "ambari-agent is configured"
 
-echo " prerequisites are installed" 
+echo " prerequisites are installed"
