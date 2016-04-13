@@ -20,4 +20,10 @@ dir_name=$(dirname "${identity_file}")
 
 mkdir -p "~/.ssh/"
 
+
 echo "Host ${remote_host_name}"\n\tUser ${user_name}\n\tHostname ${remote_host}\n\tIdentityfile ${identity_file} >> "~/.ssh/config"
+
+# Host hostname
+#     User username
+#         Hostname private_ip
+#	     ProxyCommand ssh -q -W %h:%p publicip/serverdns

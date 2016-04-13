@@ -20,4 +20,4 @@ dir_name=$(dirname "${identity_file}")
 mkdir -p ${dir_name}
 
 echo "Seting up ssh keys"
-ssh-keygen -t rsa -b 4096 -N "" -C "${email}" -f "${identity_file}" >> ${log_file}
+ssh-keygen -t rsa -b 4096 -N "" -C "${email}" -f "~/.ssh/${identity_file}" >> ${log_file}
