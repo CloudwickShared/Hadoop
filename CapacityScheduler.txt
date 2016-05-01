@@ -50,7 +50,7 @@ yarn.scheduler.capacity.root.dev.acl_administer_queue=lydia
 yarn.scheduler.capacity.root.dev.acl_submit_applications=lydia
 yarn.scheduler.capacity.root.dev.capacity=70
 yarn.scheduler.capacity.root.queues=dev,admin
-
+yarn.scheduler.capacity.queue-mappings-override.enabl=true
 
 Main differences:
 
@@ -70,7 +70,15 @@ yarn.scheduler.capacity.root.dev.acl_administer_queue=lydia
 yarn.scheduler.capacity.root.dev.acl_submit_applications=lydia
 yarn.scheduler.capacity.root.dev.capacity=70
 yarn.scheduler.capacity.root.queues=dev,admin
+yarn.scheduler.capacity.queue-mappings-override.enabl=true
+
+Notes:
+
+In this example the user lydia and the user maria was assigned to the dev pool whereas user despina was assigned to the admin pool using the property:
+yarn.scheduler.capacity.queue-mappings=u:lydia:dev, u:despoina:admin, u:maria:dev
 
 
+To specify that all applications are submitted to the queue with the same name as a group, use this mapping assignment:
 
-In this example the user lydia and the user maria was assigned to the dev pool whereas user despina was assigned to the admin pool.
+u:%user:%primary_group
+
