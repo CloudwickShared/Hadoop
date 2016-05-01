@@ -33,7 +33,7 @@ yarn.scheduler.capacity.root.queues=dev.admin
 
 After:
 
-yarn.scheduler.capacity.default.minimum-user-limit-percent=100
+yarn.scheduler.capacity.default.minimum-user-limit-percent=25
 yarn.scheduler.capacity.maximum-am-resource-percent=0.2
 yarn.scheduler.capacity.maximum-applications=10000
 yarn.scheduler.capacity.node-locality-delay=40
@@ -74,11 +74,19 @@ yarn.scheduler.capacity.queue-mappings-override.enabl=true
 
 Notes:
 
-In this example the user lydia and the user maria was assigned to the dev pool whereas user despina was assigned to the admin pool using the property:
-yarn.scheduler.capacity.queue-mappings=u:lydia:dev, u:despoina:admin, u:maria:dev
+1. The minimum-user-limit-percent property can be used to set the minimum percentage of resources allocated to each leaf queue user.
 
+yarn.scheduler.capacity.default.minimum-user-limit-percent=25
+
+2. In this example the user lydia and the user maria was assigned to the dev pool whereas user despina was assigned to the admin pool using the property:
+yarn.scheduler.capacity.queue-mappings=u:lydia:dev, u:despoina:admin, u:maria:dev
 
 To specify that all applications are submitted to the queue with the same name as a group, use this mapping assignment:
 
 u:%user:%primary_group
 
+
+
+Useful links:
+
+http://docs.hortonworks.com/HDPDocuments/HDP2/HDP-2.3.0/bk_yarn_resource_mgt/content/ch_capacity_scheduler.html
