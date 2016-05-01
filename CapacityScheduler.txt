@@ -75,6 +75,7 @@ yarn.scheduler.capacity.queue-mappings-override.enabl=true
 Notes:
 
 1. The minimum-user-limit-percent property can be used to set the minimum percentage of resources allocated to each leaf queue user.
+http://docs.hortonworks.com/HDPDocuments/HDP2/HDP-2.3.0/bk_yarn_resource_mgt/content/setting_user_limits.html
 
 yarn.scheduler.capacity.default.minimum-user-limit-percent=25
 
@@ -84,6 +85,9 @@ yarn.scheduler.capacity.queue-mappings=u:lydia:dev, u:despoina:admin, u:maria:de
 To specify that all applications are submitted to the queue with the same name as a group, use this mapping assignment:
 
 u:%user:%primary_group
+
+3. Define the queuesfor example dev and admin:
+yarn.scheduler.capacity.root.queues=dev,admin
 
 
 
