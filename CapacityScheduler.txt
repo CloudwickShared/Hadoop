@@ -79,14 +79,19 @@ http://docs.hortonworks.com/HDPDocuments/HDP2/HDP-2.3.0/bk_yarn_resource_mgt/con
 
 yarn.scheduler.capacity.default.minimum-user-limit-percent=25
 
-2. In this example the user lydia and the user maria was assigned to the dev pool whereas user despina was assigned to the admin pool using the property:
+2. Use the yarn.scheduler.capacity.<queue-path>.maximum-am-resource-percent property to restrict the number of concurrent applications running in the queue 
+to avoid a scenario in which too many applications are running simultaneously. Limits on each queue are directly proportional to their queue capacities and user limits. 
+
+yarn.scheduler.capacity.maximum-am-resource-percent=0.2
+
+3. In this example the user lydia and the user maria was assigned to the dev pool whereas user despina was assigned to the admin pool using the property:
 yarn.scheduler.capacity.queue-mappings=u:lydia:dev, u:despoina:admin, u:maria:dev
 
 To specify that all applications are submitted to the queue with the same name as a group, use this mapping assignment:
 
 u:%user:%primary_group
 
-3. Define the queuesfor example dev and admin:
+4. Define the queues for example dev and admin:
 yarn.scheduler.capacity.root.queues=dev,admin
 
 
