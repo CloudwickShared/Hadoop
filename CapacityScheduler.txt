@@ -9,6 +9,7 @@ rest 25 %. Your cluster should have the first names of your team members as its
 users. You are free to allot them the pools you want.
 
 
+Solution
 
 Go at Ambari -> Yarn -> Config -> Advanced -> Scheduler and edit the field Capacity Scheduler.
 
