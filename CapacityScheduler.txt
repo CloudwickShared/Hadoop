@@ -1,0 +1,102 @@
+Assignment
+
+Create a multi tenant cluster and set up Fair scheduler. It should have two pools  
+
+‘dev’ and ‘admin’, with development having 75 % weights and admin having the 
+
+rest 25 %. Your cluster should have the first names of your team members as its 
+
+users. You are free to allot them the pools you want.
+
+
+Solution
+
+Go at Ambari -> Yarn -> Config -> Advanced -> Scheduler and edit the field Capacity Scheduler.
+
+Before:
+
+yarn.scheduler.capacity.default.minimum-user-limit-percent=100
+yarn.scheduler.capacity.maximum-am-resource-percent=0.2
+yarn.scheduler.capacity.maximum-applications=10000
+yarn.scheduler.capacity.node-locality-delay=40
+yarn.scheduler.capacity.root.accessible-node-labels=*
+yarn.scheduler.capacity.root.acl_administer_jobs=yarn
+yarn.scheduler.capacity.root.acl_administer_queue=yarn
+yarn.scheduler.capacity.root.capacity=100
+yarn.scheduler.capacity.root.default.acl_administer_jobs=yarn
+yarn.scheduler.capacity.root.default.acl_administer_queue=yarn
+yarn.scheduler.capacity.root.default.acl_submit_applications=yarn
+yarn.scheduler.capacity.root.default.capacity=100
+yarn.scheduler.capacity.root.default.maximum-capacity=100
+yarn.scheduler.capacity.root.default.state=RUNNING
+yarn.scheduler.capacity.root.default.user-limit-factor=1
+yarn.scheduler.capacity.root.queues=dev.admin
+
+After:
+
+yarn.scheduler.capacity.default.minimum-user-limit-percent=25
+yarn.scheduler.capacity.maximum-am-resource-percent=0.2
+yarn.scheduler.capacity.maximum-applications=10000
+yarn.scheduler.capacity.node-locality-delay=40
+yarn.scheduler.capacity.queue-mappings=u:lydia:dev, u:despoina:admin, u:maria:dev
+yarn.scheduler.capacity.root.acl_administer_jobs=yarn
+yarn.scheduler.capacity.root.acl_administer_queue=yarn
+yarn.scheduler.capacity.root.admin.acl_administer_queue=despoina
+yarn.scheduler.capacity.root.admin.acl_submit_applications=despoina
+yarn.scheduler.capacity.root.admin.capacity=30
+yarn.scheduler.capacity.root.default.acl_administer_jobs=yarn
+yarn.scheduler.capacity.root.default.acl_administer_queue=yarn
+yarn.scheduler.capacity.root.default.acl_submit_applications=yarn
+yarn.scheduler.capacity.root.dev.acl_administer_queue=lydia
+yarn.scheduler.capacity.root.dev.acl_submit_applications=lydia
+yarn.scheduler.capacity.root.dev.capacity=70
+yarn.scheduler.capacity.root.queues=dev,admin
+yarn.scheduler.capacity.queue-mappings-override.enabl=true
+
+Main differences:
+
+removed:
+
+ yarn.scheduler.capacity.root.accessible-node-labels=*
+ 
+and added:
+
+yarn.scheduler.capacity.queue-mappings=u:lydia:dev, u:despoina:admin, u:maria:dev
+
+yarn.scheduler.capacity.root.admin.acl_administer_queue=despoina
+yarn.scheduler.capacity.root.admin.acl_submit_applications=despoina
+yarn.scheduler.capacity.root.admin.capacity=30
+
+yarn.scheduler.capacity.root.dev.acl_administer_queue=lydia
+yarn.scheduler.capacity.root.dev.acl_submit_applications=lydia
+yarn.scheduler.capacity.root.dev.capacity=70
+yarn.scheduler.capacity.root.queues=dev,admin
+yarn.scheduler.capacity.queue-mappings-override.enabl=true
+
+Notes:
+
+1. The minimum-user-limit-percent property can be used to set the minimum percentage of resources allocated to each leaf queue user.
+http://docs.hortonworks.com/HDPDocuments/HDP2/HDP-2.3.0/bk_yarn_resource_mgt/content/setting_user_limits.html
+
+yarn.scheduler.capacity.default.minimum-user-limit-percent=25
+
+2. Use the yarn.scheduler.capacity.<queue-path>.maximum-am-resource-percent property to restrict the number of concurrent applications running in the queue 
+to avoid a scenario in which too many applications are running simultaneously. Limits on each queue are directly proportional to their queue capacities and user limits. 
+
+yarn.scheduler.capacity.maximum-am-resource-percent=0.2
+
+3. In this example the user lydia and the user maria was assigned to the dev pool whereas user despina was assigned to the admin pool using the property:
+yarn.scheduler.capacity.queue-mappings=u:lydia:dev, u:despoina:admin, u:maria:dev
+
+To specify that all applications are submitted to the queue with the same name as a group, use this mapping assignment:
+
+u:%user:%primary_group
+
+4. Define the queues for example dev and admin:
+yarn.scheduler.capacity.root.queues=dev,admin
+
+
+
+Useful links:
+
+http://docs.hortonworks.com/HDPDocuments/HDP2/HDP-2.3.0/bk_yarn_resource_mgt/content/ch_capacity_scheduler.html
