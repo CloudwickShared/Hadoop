@@ -32,7 +32,7 @@ do
     for month in {1..12}
     do
 	INFILE="On_Time_On_Time_Performance_${year}_${month}"
-	unzip -p ${INFILE}.zip ${INFILE}.csv | sed '1d' >> ${OUTFILE}
+	unzip -p ${INFILE}.zip ${INFILE}.csv | sed '1d' | awk -F\" '{OFS="\"";for(i=2;i<NF;i+=2)gsub(/,/,"\\,",$i);print}' >> ${OUTFILE}
     done
     echo "Creating GZip file for ${year}" 1>&2
     gzip ${OUTFILE}
