@@ -95,6 +95,8 @@ u:%user:%primary_group
 4. Define the queues for example dev and admin:
 yarn.scheduler.capacity.root.queues=dev,admin
 
+5. Enable overriding of mappings of users to queues so that a user can submit an application to a different queue.
+yarn.scheduler.capacity.queue-mappings-override.enabl=true
 
 
 Useful links:
