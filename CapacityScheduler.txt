@@ -98,6 +98,9 @@ yarn.scheduler.capacity.root.queues=dev,admin
 5. Enable overriding of mappings of users to queues so that a user can submit an application to a different queue.
 yarn.scheduler.capacity.queue-mappings-override.enabl=true
 
+When we submit a map-reduce job we can see on Hadoop Scheduler log the Queues that the jobs were assigned to using:
+
+ssh -L 8088:172.16.5.114:8088 despoina@openstack.cloudwick.com
 
 Useful links:
 
