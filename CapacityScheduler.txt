@@ -92,7 +92,7 @@ To specify that all applications are submitted to the queue with the same name a
 
 u:%user:%primary_group
 
-4. Define the queues for example dev and admin:
+4. Define the queues for example dev and admin: 
 yarn.scheduler.capacity.root.queues=dev,admin
 
 5. Enable overriding of mappings of users to queues so that a user can submit an application to a different queue.
